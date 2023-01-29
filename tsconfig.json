@@ -1,0 +1,42 @@
+{
+  "compilerOptions": {
+    "module": "es2022",
+    "target": "es2021",
+    "lib": ["es2021"],
+    "moduleResolution": "node",
+    "baseUrl": ".",
+    // "paths": {
+    //   "@/*": ["src/*"] // aliases
+    // },
+    "rootDir": "src",
+    "outDir": "build",
+    "strict": true,
+    "checkJs": true,
+    // "sourceMap": true,
+    // "isolatedModules": true,
+    "resolveJsonModule": true,
+    "strictPropertyInitialization": false, // question
+    /* decorators support */
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "exactOptionalPropertyTypes": true,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitOverride": true,
+    "noImplicitReturns": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "noUncheckedIndexedAccess": true,
+    // "noUnusedLocals": true,
+    // "noUnusedParameters": true,
+    "allowUnusedLabels": false,
+    "allowUnreachableCode": false
+  },
+  "include": ["src"],
+  "exclude": ["node_modules"],
+  "ts-node": {
+    "esm": true
+  }
+}
