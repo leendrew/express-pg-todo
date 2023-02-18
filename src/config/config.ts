@@ -26,5 +26,5 @@ export const config = {
   PG_PORT: parseInt(checkEnv(ENV.PG_PORT), 10),
   PG_URL: '',
 };
-
 config.PG_URL = `postgresql://${config.PG_USER}:${config.PG_PASS}@${config.PG_HOST}:${config.PG_PORT}/${config.PG_NAME}`;
+export type Config = typeof config;

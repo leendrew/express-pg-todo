@@ -1,13 +1,9 @@
-import { Repository } from 'typeorm';
-import type { DBService } from '../db.service.js';
+import type { Repository } from 'typeorm';
 import { Todo } from './todo.entity.js';
+import type { TodoCreateOneDto, TodoEditDto, TodoDeleteByIdDto } from './todo.model.js';
 
 export class TodoRepository {
-  private readonly repository: Repository<Todo>;
-
-  constructor(private readonly _db: DBService) {
-    this.repository = _db.getRepository(Todo);
-  }
+  constructor(private readonly repository: Repository<Todo>) {}
 
   async getAll() {
     const res = await this.repository.find();
@@ -23,30 +19,34 @@ export class TodoRepository {
     return res;
   }
 
-  async createOne(todo: Partial<Todo>) {
-    const newTodo = this.repository.create({ ...todo });
+  async createOne(todo: TodoCreateOneDto) {
+    // TODO: need test
+    const newTodo = this.repository.create(todo);
     const res = await this.repository.save(newTodo);
 
     return res;
   }
 
-  async editById(todo: Partial<Todo>) {
+  async editById(todo: TodoEditDto) {
     const res = await this.repository
       .createQueryBuilder()
       .update(Todo)
-      .set({ ...todo })
+      // TODO: need test
+      .set(todo)
       .where('id=:id', { id: todo.id })
       .execute();
 
     return res;
   }
 
-  async deleteById(id: number) {
+  // id = { id: number}
+  async deleteById(id: TodoDeleteByIdDto) {
     const res = await this.repository
       .createQueryBuilder()
       .delete()
       .from(Todo)
-      .where('id=:id', { id })
+      // TODO: need test
+      .where('id=:id', id)
       .execute();
 
     return res;

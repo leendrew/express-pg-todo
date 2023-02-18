@@ -2,15 +2,17 @@
   "root": true,
   "env": {
     "jest": true,
-    "node": true
+    "node": true,
+    "es6": true
   },
   "extends": [
     "airbnb-base",
-    "prettier",
+    "eslint:recommended",
+    "plugin:prettier/recommended",
     "plugin:@typescript-eslint/recommended",
     "plugin:@typescript-eslint/recommended-requiring-type-checking"
   ],
-  "plugins": ["@typescript-eslint", "prettier"],
+  "plugins": ["@typescript-eslint"],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "sourceType": "module",
@@ -18,29 +20,31 @@
     "tsconfigRootDir": "."
   },
   "rules": {
+    "indent": "off",
+    "no-shadow": "off",
+    "no-underscore-dangle": ["error", { "allow": ["_id", "__filename", "__dirname"] }],
+    "import/prefer-default-export": "off",
+    "import/no-unresolved": "error",
+    "no-useless-constructor": "off",
+    "@typescript-eslint/no-useless-constructor": "error",
+    "@typescript-eslint/no-floating-promises": ["error", { "ignoreIIFE": true }],
     "import/extensions": [
       "error",
-      "always",
+      "ignorePackages",
       {
         "ts": "never",
         "js": "never"
       }
-    ],
-    "no-shadow": "off",
-    "no-console": "warn",
-    "no-underscore-dangle": ["error", { "allow": ["_id"] }],
-    "no-param-reassign": ["error", { "props": false }],
-    "import/prefer-default-export": "off",
-    "@typescript-eslint/no-use-before-define": ["error"],
-    "@typescript-eslint/no-unsafe-assignment": "warn",
-    "@typescript-eslint/no-unsafe-member-access": "warn",
-    "@typescript-eslint/no-shadow": ["error"],
-    "@typescript-eslint/no-floating-promises": ["error", { "ignoreIIFE": true }]
+    ]
   },
   "settings": {
+    "import/parsers": {
+      "@typescript-eslint/parser": [".ts"]
+    },
     "import/resolver": {
-      "node": {
-        "extensions": [".js", ".ts"]
+      "typescript": {
+        "project": "./tsconfig.json",
+        "alwaysTrueType": true
       }
     }
   }
