@@ -1,11 +1,11 @@
 version: '3.8'
 
 volumes:
-  postgres_data:
+  db-data:
 
 services:
   postgres:
-    container_name: univ-db
+    container_name: todo-db
     image: postgres:14.2-alpine
     command:
       - 'postgres'
@@ -38,16 +38,16 @@ services:
       - '-c'
       - 'pg_stat_statements.track=all'
     environment:
-      POSTGRES_DB: ${PG_NAME:-db_name}
+      POSTGRES_DB: ${PG_NAME:-test-db}
       POSTGRES_USER: ${PG_USER:-test}
       POSTGRES_PASSWORD: ${PG_PASS:-test}
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - db-data:/var/lib/postgresql/data
       # - ./sql:/docker-entrypoint-initdb.d
     ports:
       - 5432:5432
     healthcheck:
-      test: ['CMD-SHELL', 'pg_isready -U ${PG_USER:-test} -d ${PG_NAME:-db_name}']
+      test: ['CMD-SHELL', 'pg_isready -U ${PG_USER:-test} -d ${PG_NAME:-test-db}']
       interval: 10s
       timeout: 5s
       retries: 5
@@ -58,7 +58,7 @@ services:
           cpus: '1'
           memory: 4G
   app:
-    container_name: app
+    container_name: todo-app
     depends_on:
       - postgres
     build: .

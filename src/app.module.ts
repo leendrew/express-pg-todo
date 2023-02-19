@@ -9,18 +9,17 @@ export class App {
     private readonly db: DBService,
     private readonly app: Application = express(),
   ) {
-    this.initMiddlewares();
-    this.initRoutes();
+    this.init();
   }
 
-  private initMiddlewares() {
+  private init() {
     this.app.disable('x-powered-by');
     this.app.use(express.json());
     this.app.use(express.urlencoded({ extended: true }));
-  }
-
-  private initRoutes() {
+    // TODO: cors
+    // TODO: rate limiter
     this.app.use('/api', this.router);
+    // TODO: error middleware always last (err, req, res, next) => {...}
   }
 
   public bootstrap() {

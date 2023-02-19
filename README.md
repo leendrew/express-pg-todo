@@ -8,6 +8,6 @@
 
 ## Todo
 
-- eslint setup (eslint typescript node)
 - swagger
 - migrations
+- versioning

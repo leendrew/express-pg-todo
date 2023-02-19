@@ -6,13 +6,9 @@ export class TodoController {
   constructor(private readonly todoRepository: TodoRepository) {}
 
   public get = async (req: Request<never, never, never, TodoGetDto>, res: Response) => {
-    const params = req.query;
-    if (params.isCompleted || params.priority) {
-      const result = await this.todoRepository.getByParams(params);
-      return res.json(result);
-    }
-    const result = await this.todoRepository.getAll();
-    return res.json(result);
+    const { query } = req;
+    const todos = await this.todoRepository.get(query);
+    return res.json(todos);
   };
 
   public createOne = async (req: Request<never, never, TodoCreateOneDto>, res: Response) => {
@@ -24,16 +20,16 @@ export class TodoController {
 
   public edit = async (req: Request<never, never, TodoEditDto>, res: Response) => {
     const todo = req.body;
-    const editedTodo = await this.todoRepository.editById(todo);
+    const result = await this.todoRepository.editById(todo);
 
-    return res.json(editedTodo);
+    return res.json(result);
   };
 
   public deleteById = async (req: Request<TodoDeleteByIdDto>, res: Response) => {
     const { params } = req;
-    const deletedTodo = await this.todoRepository.deleteById(params);
+    const result = await this.todoRepository.deleteById(params);
 
-    return res.json(deletedTodo);
+    return res.json(result);
   };
 
   public deleteCompleted = async (req: Request, res: Response) => {

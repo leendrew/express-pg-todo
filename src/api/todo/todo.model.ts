@@ -7,7 +7,7 @@ export interface Todo {
   task: string;
 }
 
-export type TodoGetDto = Partial<Pick<Todo, 'isCompleted' | 'priority'>>;
-export type TodoCreateOneDto = Partial<Todo>;
+export type TodoGetDto = Partial<Omit<Todo, 'task'>>;
+export type TodoCreateOneDto = Partial<Omit<Todo, 'id'>>;
 export type TodoEditDto = Partial<Todo>;
 export type TodoDeleteByIdDto = Pick<Todo, 'id'>;
