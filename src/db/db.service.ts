@@ -12,7 +12,7 @@ export const dbService = new DataSource({
   username: config.PG_USER,
   password: config.PG_PASS,
   database: config.PG_NAME,
-  entities: [join(__dirname, '../api/**/*.entity.ts')],
+  entities: [join(__dirname, '../api/**/*.entity.{ts,js}')],
   synchronize: true,
   logging: false,
 });
