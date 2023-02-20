@@ -1,3 +1,5 @@
+# Todo
+
 ## Stack
 
 - TypeScript
@@ -11,3 +13,5 @@
 - swagger
 - migrations
 - versioning
+- logger
+- schema validator

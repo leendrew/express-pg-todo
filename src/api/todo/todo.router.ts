@@ -9,6 +9,7 @@ export class TodoRouter {
 
   private initRoutes() {
     this.router.get('/', this.controller.get);
+    this.router.get('/:id', this.controller.getById);
     this.router.post('/', this.controller.createOne);
     this.router.put('/:id', this.controller.edit);
     this.router.delete('/', this.controller.deleteCompleted);

@@ -1,11 +1,18 @@
 import type { Repository } from 'typeorm';
 import { Todo } from './todo.entity.js';
-import type { TodoGetDto, TodoCreateOneDto, TodoEditDto, TodoDeleteByIdDto } from './todo.model.js';
+import type {
+  TodoGetQueryDto,
+  TodoGetParamsDto,
+  TodoCreateOneQueryDto,
+  TodoEditQueryDto,
+  TodoEditBodyDto,
+  TodoDeleteByIdParamsDto,
+} from './todo.model.js';
 
 export class TodoRepository {
   constructor(private readonly repository: Repository<Todo>) {}
 
-  async get(params: TodoGetDto) {
+  public async get(params: TodoGetParamsDto | TodoGetQueryDto) {
     const res = await this.repository.find({
       where: params,
     });
@@ -13,14 +20,14 @@ export class TodoRepository {
     return res;
   }
 
-  async createOne(todo: TodoCreateOneDto) {
+  public async createOne(todo: TodoCreateOneQueryDto) {
     const newTodo = this.repository.create(todo);
     const res = await this.repository.save(newTodo);
 
     return res;
   }
 
-  async editById(todo: TodoEditDto) {
+  public async editById(todo: TodoEditQueryDto & TodoEditBodyDto) {
     const res = await this.repository
       .createQueryBuilder()
       .update(Todo)
@@ -31,7 +38,7 @@ export class TodoRepository {
     return res;
   }
 
-  async deleteById(id: TodoDeleteByIdDto) {
+  public async deleteById(id: TodoDeleteByIdParamsDto) {
     const res = await this.repository
       .createQueryBuilder()
       .delete()
@@ -42,7 +49,7 @@ export class TodoRepository {
     return res;
   }
 
-  async deleteCompleted() {
+  public async deleteCompleted() {
     const res = await this.repository
       .createQueryBuilder()
       .delete()
