@@ -7,7 +7,13 @@ export interface Todo {
   task: string;
 }
 
-export type TodoGetDto = Partial<Omit<Todo, 'task'>>;
-export type TodoCreateOneDto = Partial<Omit<Todo, 'id'>>;
-export type TodoEditDto = Partial<Todo>;
-export type TodoDeleteByIdDto = Pick<Todo, 'id'>;
+type TodoParams = Pick<Todo, 'id'>;
+type TodoQuery = Partial<Omit<Todo, 'id'>>;
+type TodoBody = Omit<Todo, 'id'>;
+
+export type TodoGetQueryDto = Omit<TodoQuery, 'task'>;
+export type TodoGetParamsDto = TodoParams;
+export type TodoCreateOneQueryDto = Pick<Todo, 'task'> & Omit<TodoQuery, 'task'>;
+export type TodoEditQueryDto = Pick<Todo, 'id'>;
+export type TodoEditBodyDto = Partial<TodoBody>;
+export type TodoDeleteByIdParamsDto = TodoParams;
