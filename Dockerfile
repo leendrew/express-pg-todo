@@ -5,7 +5,7 @@ COPY package.json yarn.lock ./
 RUN yarn install --frozen-lockfile
 COPY . .
 
-FROM node:16.15-alpine as runner
+FROM node:16.15-alpine as development
 WORKDIR /app
 
 COPY --from=builder /app/.env ./.env
