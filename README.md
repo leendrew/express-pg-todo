@@ -1,5 +1,11 @@
 # Todo
 
+## Start
+
+```shell
+docker-compose up --build
+```
+
 ## Stack
 
 - TypeScript
