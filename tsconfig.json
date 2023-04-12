@@ -13,15 +13,16 @@
     "strict": true,
     "checkJs": true,
     // "sourceMap": true,
-    // "isolatedModules": true,
+    "isolatedModules": true,
     "resolveJsonModule": true,
-    "strictPropertyInitialization": false, // question
+    "strictPropertyInitialization": false,
     /* decorators support */
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
 
     "skipLibCheck": true,
     "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
     "exactOptionalPropertyTypes": true,
     "noFallthroughCasesInSwitch": true,
